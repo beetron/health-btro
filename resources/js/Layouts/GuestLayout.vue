@@ -1,22 +1,30 @@
 <script setup lang="ts">
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import { Link } from "@inertiajs/vue3";
+import ThemeToggle from "@/Components/ThemeToggle.vue";
 </script>
 
 <template>
     <div
-        class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0"
+        class="min-h-screen bg-base-200 text-base-content transition-colors duration-200"
     >
-        <div>
-            <Link href="/">
-                <ApplicationLogo class="h-20 w-20 fill-current text-gray-500" />
-            </Link>
-        </div>
-
-        <div
-            class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg"
+        <header
+            class="navbar bg-base-100 border-b border-base-300 px-4 sm:px-6"
         >
+            <div class="flex-1">
+                <Link
+                    href="/"
+                    class="btn btn-ghost text-xl normal-case font-bold"
+                >
+                    Health Stats Tracker
+                </Link>
+            </div>
+            <div class="flex-none">
+                <ThemeToggle />
+            </div>
+        </header>
+
+        <main class="py-6">
             <slot />
-        </div>
+        </main>
     </div>
 </template>
