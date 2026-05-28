@@ -4,6 +4,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
+import type { PageProps } from "@/Types";
 
 defineProps({
     mustVerifyEmail: {
@@ -13,11 +14,11 @@ defineProps({
         type: String,
     },
 });
-
-const user = usePage().props.auth.user;
+const page = usePage<PageProps>();
+const user = page.props.auth.user;
 
 const form = useForm({
-    name: user.name,
+    name: user.username,
     email: user.email,
 });
 </script>
