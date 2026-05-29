@@ -12,7 +12,8 @@ const props = defineProps({
     },
     contentClasses: {
         type: String,
-        default: "py-1 bg-white",
+        // Changed "bg-white" to "bg-base-100" to adapt seamlessly to DaisyUI themes
+        default: "py-1 bg-base-100",
     },
 });
 
@@ -50,7 +51,6 @@ const open = ref(false);
             <slot name="trigger" />
         </div>
 
-        <!-- Full Screen Dropdown Overlay -->
         <div
             v-show="open"
             class="fixed inset-0 z-40"
@@ -73,7 +73,7 @@ const open = ref(false);
                 @click="open = false"
             >
                 <div
-                    class="rounded-md ring-1 ring-black ring-opacity-5"
+                    class="rounded-md border border-base-300 shadow-xl"
                     :class="contentClasses"
                 >
                     <slot name="content" />
