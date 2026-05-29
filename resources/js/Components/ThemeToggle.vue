@@ -3,32 +3,36 @@ import { ref, onMounted } from "vue";
 
 const isDark = ref(false);
 
-// Apply theme to the <html> tag
-const applyTheme = (themeName: string) => {
-    document.documentElement.setAttribute("data-theme", themeName);
-    localStorage.setItem("theme", themeName);
-    isDark.value = themeName === "dark";
+const toggleTheme = () => {
+    isDark.value = !isDark.value;
+
+    if (isDark.value) {
+        document.documentElement.classList.add("dark");
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+    } else {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+    }
 };
 
-// Check for existing preference on mount
 onMounted(() => {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)",
     ).matches;
 
-    if (savedTheme) {
-        applyTheme(savedTheme);
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+        isDark.value = true;
+        document.documentElement.classList.add("dark");
+        document.documentElement.setAttribute("data-theme", "dark");
     } else {
-        applyTheme(prefersDark ? "dark" : "light");
+        isDark.value = false;
+        document.documentElement.classList.remove("dark");
+        document.documentElement.setAttribute("data-theme", "light");
     }
 });
-
-// Toggle handler
-const toggleTheme = () => {
-    const nextTheme = isDark.value ? "light" : "dark";
-    applyTheme(nextTheme);
-};
 </script>
 
 <template>
@@ -37,21 +41,21 @@ const toggleTheme = () => {
             type="checkbox"
             :checked="isDark"
             @change="toggleTheme"
-            class="hidden"
+            class="opacity-0 absolute"
         />
 
         <svg
-            class="swap-on fill-current w-6 h-6"
+            class="swap-on fill-current w-6 h-6 text-yellow-500"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
         >
             <path
-                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,18.36,17ZM12,6a6,6,0,1,0,6,6A6,6,0,0,0,12,6Z"
+                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,18.36,17ZM12,6a6,6,0,1,0,6,6A6,6,0,0,0,12,6Z"
             />
         </svg>
 
         <svg
-            class="swap-off fill-current w-6 h-6"
+            class="swap-off fill-current w-6 h-6 text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
         >
