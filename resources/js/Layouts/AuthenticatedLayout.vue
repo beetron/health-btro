@@ -17,7 +17,7 @@ const showingNavigationDropdown = ref(false);
             class="min-h-screen bg-base-200 text-base-content transition-colors duration-200"
         >
             <nav
-                class="border-b border-base-300 bg-base-100 transition-colors duration-200"
+                class="border-b border-base-300 bg-base-100 transition-colors duration-200 shadow-sm"
             >
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
@@ -43,7 +43,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div class="me-3">
+                            <div class="me-2">
                                 <ThemeToggle />
                             </div>
 
@@ -53,12 +53,12 @@ const showingNavigationDropdown = ref(false);
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center rounded-md border border-transparent bg-base-100 px-3 py-2 text-sm font-medium leading-4 text-base-content/70 transition duration-150 ease-in-out hover:text-base-content focus:outline-none"
+                                                class="btn btn-ghost btn-sm normal-case text-sm font-medium text-base-content/80 hover:bg-base-200 focus:outline-none"
                                             >
                                                 {{ $page.props.auth.user.name }}
 
                                                 <svg
-                                                    class="-me-0.5 ms-2 h-4 w-4"
+                                                    class="-me-0.5 ms-2 h-4 w-4 opacity-60"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
                                                     fill="currentColor"
@@ -97,7 +97,7 @@ const showingNavigationDropdown = ref(false);
                                     showingNavigationDropdown =
                                         !showingNavigationDropdown
                                 "
-                                class="inline-flex items-center justify-center rounded-md p-2 text-base-content/60 transition duration-150 ease-in-out hover:bg-base-200 hover:text-base-content focus:bg-base-200 focus:text-base-content focus:outline-none"
+                                class="btn btn-ghost btn-sm btn-circle text-base-content/70 hover:bg-base-200 focus:outline-none"
                             >
                                 <svg
                                     class="h-6 w-6"
@@ -138,7 +138,7 @@ const showingNavigationDropdown = ref(false);
                         block: showingNavigationDropdown,
                         hidden: !showingNavigationDropdown,
                     }"
-                    class="sm:hidden"
+                    class="sm:hidden bg-base-100 border-t border-base-200"
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
@@ -149,16 +149,20 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                     </div>
 
-                    <div class="border-t border-base-300 pb-1 pt-4">
-                        <div class="px-4 flex justify-between items-center">
+                    <div
+                        class="border-t border-base-300 pb-1 pt-4 bg-base-200/40"
+                    >
+                        <div
+                            class="px-4 flex justify-between items-center mb-3"
+                        >
                             <div>
                                 <div
-                                    class="text-base font-medium text-base-content"
+                                    class="text-base font-semibold text-base-content"
                                 >
                                     {{ $page.props.auth.user.name }}
                                 </div>
                                 <div
-                                    class="text-sm font-medium text-base-content/70"
+                                    class="text-sm font-medium text-base-content/60"
                                 >
                                     {{ $page.props.auth.user.email }}
                                 </div>
@@ -166,7 +170,7 @@ const showingNavigationDropdown = ref(false);
                             <ThemeToggle />
                         </div>
 
-                        <div class="mt-3 space-y-1">
+                        <div class="space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')">
                                 Profile
                             </ResponsiveNavLink>
@@ -174,6 +178,7 @@ const showingNavigationDropdown = ref(false);
                                 :href="route('logout')"
                                 method="post"
                                 as="button"
+                                class="text-error hover:bg-error/10"
                             >
                                 Log Out
                             </ResponsiveNavLink>
@@ -183,7 +188,7 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <header
-                class="bg-base-100 shadow-sm transition-colors duration-200"
+                class="bg-base-100 shadow-sm border-b border-base-200 transition-colors duration-200"
                 v-if="$slots.header"
             >
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

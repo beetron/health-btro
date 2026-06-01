@@ -28,7 +28,7 @@ const submit = () => {
             class="flex min-h-[calc(100vh-12rem)] items-center justify-center px-4 sm:px-6 lg:px-8"
         >
             <div
-                class="card w-full max-w-md bg-base-100 shadow-xl border border-base-200"
+                class="card w-full max-w-md bg-base-100 shadow-xl border border-base-300"
             >
                 <div class="card-body gap-4 p-6 sm:p-8">
                     <div class="text-center mb-2">
@@ -44,16 +44,12 @@ const submit = () => {
 
                     <form @submit.prevent="submit" class="space-y-5">
                         <div class="form-control w-full">
-                            <InputLabel
-                                for="name"
-                                value="Full Name"
-                                class="label label-text font-medium"
-                            />
+                            <InputLabel for="name" value="Full Name" />
 
                             <TextInput
                                 id="name"
                                 type="text"
-                                class="input input-bordered w-full focus:input-primary mt-1"
+                                class="mt-1"
                                 :class="{ 'input-error': form.errors.name }"
                                 v-model="form.name"
                                 required
@@ -69,16 +65,12 @@ const submit = () => {
                         </div>
 
                         <div class="form-control w-full">
-                            <InputLabel
-                                for="email"
-                                value="Email Address"
-                                class="label label-text font-medium"
-                            />
+                            <InputLabel for="email" value="Email Address" />
 
                             <TextInput
                                 id="email"
                                 type="email"
-                                class="input input-bordered w-full focus:input-primary mt-1"
+                                class="mt-1"
                                 :class="{ 'input-error': form.errors.email }"
                                 v-model="form.email"
                                 required
@@ -93,16 +85,12 @@ const submit = () => {
                         </div>
 
                         <div class="form-control w-full">
-                            <InputLabel
-                                for="password"
-                                value="Password"
-                                class="label label-text font-medium"
-                            />
+                            <InputLabel for="password" value="Password" />
 
                             <TextInput
                                 id="password"
                                 type="password"
-                                class="input input-bordered w-full focus:input-primary mt-1"
+                                class="mt-1"
                                 :class="{ 'input-error': form.errors.password }"
                                 v-model="form.password"
                                 required
@@ -120,13 +108,12 @@ const submit = () => {
                             <InputLabel
                                 for="password_confirmation"
                                 value="Confirm Password"
-                                class="label label-text font-medium"
                             />
 
                             <TextInput
                                 id="password_confirmation"
                                 type="password"
-                                class="input input-bordered w-full focus:input-primary mt-1"
+                                class="mt-1"
                                 :class="{
                                     'input-error':
                                         form.errors.password_confirmation,
@@ -145,7 +132,7 @@ const submit = () => {
 
                         <div class="form-control mt-6">
                             <PrimaryButton
-                                class="btn btn-primary w-full normal-case"
+                                class="w-full"
                                 :class="{ loading: form.processing }"
                                 :disabled="form.processing"
                             >

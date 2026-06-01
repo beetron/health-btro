@@ -19,7 +19,7 @@ export default {
         },
     },
 
-    plugins: [forms, daisyui],
+    plugins: [daisyui],
     daisyui: {
         // The first theme in the list becomes the default
         themes: ["dark", "light"],
