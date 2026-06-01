@@ -2,7 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent Chrome/Safari from forcing a white background on autofilled fields */
+@layer base {
+    /* --------------------------------------------------------
+       LIGHT MODE STYLE DEFINITIONS (Default Baseline)
+       -------------------------------------------------------- */
+
+    input.input {
+        border: 1px solid #cbd5e1 !important;
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        padding-left: 1rem !important; /* Restores perfect inner text spacing */
+        padding-right: 1rem !important;
+    }
+
+    input.checkbox {
+        border: 1px solid #cbd5e1 !important;
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+    }
+
+    .btn-primary {
+        background-color: #4f46e5 !important;
+        color: #ffffff !important;
+    }
+
+    /* --------------------------------------------------------
+       DARK MODE STYLE DEFINITIONS (Triggered via .dark class)
+       -------------------------------------------------------- */
+
+    html.dark input.input {
+        border: 1px solid #475569 !important;
+        background-color: #1d232a !important;
+        color: #f8fafc !important;
+        padding-left: 1rem !important; /* Restores perfect inner text spacing */
+        padding-right: 1rem !important;
+    }
+
+    html.dark input.checkbox {
+        border: 1px solid #475569 !important;
+        background-color: #1d232a !important;
+        color: #f8fafc !important;
+    }
+
+    html.dark .btn-primary {
+        background-color: oklch(58% 0.233 277.117) !important;
+        color: #ffffff !important;
+    }
+}
+
+/* --------------------------------------------------------
+   BROWSER AUTOFILL SECURITY OVERRIDES
+   -------------------------------------------------------- */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -13,6 +63,5 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
     -webkit-text-fill-color: inherit !important;
-    /* Delays the browser's color injection indefinitely */
     transition: background-color 50000s ease-in-out 0s;
 }
