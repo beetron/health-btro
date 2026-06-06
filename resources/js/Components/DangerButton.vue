@@ -1,6 +1,6 @@
 <template>
     <button
-        class="btn btn-error text-xs font-semibold uppercase tracking-widest text-error-content"
+        class="btn btn-sm px-4 bg-red-600 border-red-600 text-white hover:bg-red-700 hover:border-red-700 focus:ring-red-500"
     >
         <slot />
     </button>

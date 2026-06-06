@@ -1,5 +1,4 @@
 import defaultTheme from "tailwindcss/defaultTheme";
-import forms from "@tailwindcss/forms";
 import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
@@ -20,8 +19,9 @@ export default {
     },
 
     plugins: [daisyui],
+
     daisyui: {
-        // The first theme in the list becomes the default
+        // This instantly injects all pre-coded colors, heights, and variables for dark and light
         themes: ["dark", "light"],
     },
 };

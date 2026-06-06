@@ -1,7 +1,5 @@
 <template>
-    <button
-        class="btn btn-primary text-xs font-semibold uppercase tracking-widest text-primary-content"
-    >
+    <button class="btn btn-primary btn-sm px-4">
         <slot />
     </button>
 </template>
