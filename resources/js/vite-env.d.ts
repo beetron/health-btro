@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 
 import { DefineComponent } from "vue";
+import * as AppTypes from "./resources/js/Types/user";
 
 declare module "*.vue" {
     const component: DefineComponent<{}, {}, any>;
@@ -25,12 +26,7 @@ declare module "@inertiajs/core" {
 
     interface PageProps extends DefaultPageProps {
         auth: {
-            user: {
-                id: number;
-                name: string;
-                email: string;
-                email_verified_at?: string;
-            };
+            user: AppTypes.User;
         };
     }
 }
