@@ -1,3 +1,5 @@
+// 0001_01_01_000000_create_users_table
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->string('email')->unique();
+            $table->string('avatar_path')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('timezone')->nullable();

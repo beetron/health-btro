@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DailyStat extends Model
 {
+    // Explicitly define table name due to underscore convention
+    protected $table = 'daily_stats';
+
     // Mass assignable attributes
     protected $fillable = [
         'user_id',
-        'date_time',
+        'log_date', // Updated from date_time
         'body_weight',
         'body_fat',
         'sleep_duration',
@@ -22,10 +25,11 @@ class DailyStat extends Model
 
     // Define casts for proper data types
     protected $casts = [
-        'date_time' => 'datetime',
+        'log_date' => 'date', // Updated from datetime to date
         'body_weight' => 'float',
         'body_fat' => 'float',
         'sleep_duration' => 'integer',
+        'mood' => 'integer', // Added to guarantee integer format
         'workout' => 'boolean',
         'cardio' => 'boolean',
     ];
@@ -54,6 +58,7 @@ class DailyStat extends Model
 
     public function getSleepDurationAttribute(): int
     {
-        return $this->attributes['sleep_duration'];
+        // Fallback to prevent null errors
+        return $this->attributes['sleep_duration'] ?? 0;
     }
 }

@@ -1,9 +1,8 @@
-// resources/js/Types/user.d.ts
-
 export interface User {
     id: number;
     username: string;
     email: string;
+    avatar_path?: string | null;
     email_verified_at?: string | null;
     timezone?: string | null;
     clock_format: string;
