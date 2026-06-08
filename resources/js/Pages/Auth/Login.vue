@@ -130,10 +130,14 @@ const submit = () => {
                         <div class="form-control mt-6">
                             <PrimaryButton
                                 class="w-full normal-case"
-                                :class="{ loading: form.processing }"
                                 :disabled="form.processing"
                             >
-                                <span v-if="!form.processing">Log in</span>
+                                <span
+                                    v-if="form.processing"
+                                    class="loading loading-spinner loading-sm"
+                                ></span>
+
+                                <span>Log in</span>
                             </PrimaryButton>
                         </div>
 
