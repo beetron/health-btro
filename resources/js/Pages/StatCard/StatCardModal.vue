@@ -86,6 +86,7 @@ function submitForm(): void {
     }
 }
 
+// Sanitization filters applied dynamically to incoming raw user entry strings
 function handleWeightInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     // Strip out all characters except digits and solitary decimal points
@@ -128,20 +129,20 @@ function handleWeightInput(event: Event): void {
 <template>
     <div
         v-if="isOpen"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-950/80 backdrop-blur-sm transition-opacity"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity"
     >
         <div
-            class="relative w-full max-w-lg overflow-hidden rounded-3xl bg-[#12141c] text-white shadow-2xl border border-gray-800 animate-in fade-in zoom-in-95 duration-200"
+            class="relative w-full max-w-lg overflow-hidden rounded-3xl bg-base-100 text-base-content shadow-2xl border border-base-300 animate-in fade-in zoom-in-95 duration-200"
         >
             <div
-                class="flex items-center justify-between border-b border-gray-800 p-6"
+                class="flex items-center justify-between border-b border-base-300 p-6"
             >
                 <h2 class="text-xl font-bold tracking-tight">
                     {{ stat ? "Edit Daily Log" : "Add Daily Log" }}
                 </h2>
                 <button
                     @click="emit('close')"
-                    class="rounded-xl p-1.5 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+                    class="rounded-xl p-1.5 text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +167,7 @@ function handleWeightInput(event: Event): void {
             >
                 <div>
                     <label
-                        class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-400 mb-2"
+                        class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-base-content/70 mb-2"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +175,7 @@ function handleWeightInput(event: Event): void {
                             viewBox="0 0 24 24"
                             stroke-width="2"
                             stroke="currentColor"
-                            class="h-4 w-4 text-indigo-400"
+                            class="h-4 w-4 text-primary"
                         >
                             <path
                                 stroke-linecap="round"
@@ -187,23 +188,23 @@ function handleWeightInput(event: Event): void {
                     <input
                         type="date"
                         v-model="form.log_date"
-                        class="w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-sm text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                        class="w-full rounded-xl border border-base-300 bg-base-200 px-4 py-3 text-sm text-base-content focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-200"
                         required
                     />
                     <p
                         v-if="form.errors.log_date"
-                        class="mt-1.5 text-xs text-rose-500 font-medium"
+                        class="mt-1.5 text-xs text-error font-medium"
                     >
                         {{ form.errors.log_date }}
                     </p>
                 </div>
 
                 <div
-                    class="grid grid-cols-2 gap-4 rounded-2xl bg-gradient-to-br from-[#4d394e]/40 to-[#2b2235]/40 p-4 border border-purple-500/10"
+                    class="grid grid-cols-2 gap-4 rounded-2xl bg-secondary/5 p-4 border border-secondary/10"
                 >
                     <div>
                         <label
-                            class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2"
+                            class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-secondary mb-2"
                         >
                             <span>Weight (kg)</span>
                         </label>
@@ -212,13 +213,13 @@ function handleWeightInput(event: Event): void {
                             inputmode="decimal"
                             :value="form.body_weight || ''"
                             @input="handleWeightInput"
-                            class="w-full rounded-xl border border-gray-800 bg-gray-900/90 px-4 py-2.5 text-sm font-semibold focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                            class="w-full rounded-xl border border-base-300 bg-base-100 px-4 py-2.5 text-sm font-semibold text-base-content focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors duration-200"
                             placeholder="0.0"
                             required
                         />
                         <p
                             v-if="form.errors.body_weight"
-                            class="mt-1.5 text-xs text-rose-500 font-medium"
+                            class="mt-1.5 text-xs text-error font-medium"
                         >
                             {{ form.errors.body_weight }}
                         </p>
@@ -226,7 +227,7 @@ function handleWeightInput(event: Event): void {
 
                     <div>
                         <label
-                            class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-purple-300/80 mb-2"
+                            class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-secondary mb-2"
                         >
                             <span>Body Fat (%)</span>
                         </label>
@@ -234,23 +235,21 @@ function handleWeightInput(event: Event): void {
                             type="number"
                             step="0.1"
                             v-model.number="form.body_fat"
-                            class="w-full rounded-xl border border-gray-800 bg-gray-900/90 px-4 py-2.5 text-sm font-semibold focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                            class="w-full rounded-xl border border-base-300 bg-base-100 px-4 py-2.5 text-sm font-semibold text-base-content focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors duration-200"
                             required
                         />
                         <p
                             v-if="form.errors.body_fat"
-                            class="mt-1.5 text-xs text-rose-500 font-medium"
+                            class="mt-1.5 text-xs text-error font-medium"
                         >
                             {{ form.errors.body_fat }}
                         </p>
                     </div>
                 </div>
 
-                <div
-                    class="rounded-2xl bg-gradient-to-br from-[#243547]/40 to-[#16222f]/40 p-4 border border-blue-500/10"
-                >
+                <div class="rounded-2xl bg-info/5 p-4 border border-info/10">
                     <label
-                        class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-300/80 mb-3"
+                        class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-info mb-3"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +257,7 @@ function handleWeightInput(event: Event): void {
                             viewBox="0 0 24 24"
                             stroke-width="2"
                             stroke="currentColor"
-                            class="h-4 w-4 text-[#62bbf4]"
+                            class="h-4 w-4"
                         >
                             <path
                                 stroke-linecap="round"
@@ -275,10 +274,10 @@ function handleWeightInput(event: Event): void {
                                 min="0"
                                 max="24"
                                 v-model.number="sleepHours"
-                                class="w-full rounded-xl border border-gray-800 bg-gray-900/90 px-4 py-2.5 text-sm text-center font-bold text-[#62bbf4] focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                class="w-full rounded-xl border border-base-300 bg-base-100 px-4 py-2.5 text-sm text-center font-bold text-info focus:border-info focus:ring-1 focus:ring-info transition-colors duration-200"
                             />
                             <span
-                                class="text-xs font-semibold text-gray-400 uppercase tracking-wider"
+                                class="text-xs font-semibold text-base-content/60 uppercase tracking-wider"
                                 >Hrs</span
                             >
                         </div>
@@ -288,41 +287,39 @@ function handleWeightInput(event: Event): void {
                                 min="0"
                                 max="59"
                                 v-model.number="sleepMinutes"
-                                class="w-full rounded-xl border border-gray-800 bg-gray-900/90 px-4 py-2.5 text-sm text-center font-bold text-[#62bbf4] focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                class="w-full rounded-xl border border-base-300 bg-base-100 px-4 py-2.5 text-sm text-center font-bold text-info focus:border-info focus:ring-1 focus:ring-info transition-colors duration-200"
                             />
                             <span
-                                class="text-xs font-semibold text-gray-400 uppercase tracking-wider"
+                                class="text-xs font-semibold text-base-content/60 uppercase tracking-wider"
                                 >Min</span
                             >
                         </div>
                     </div>
                     <p
                         v-if="form.errors.sleep_duration"
-                        class="mt-1.5 text-xs text-rose-500 font-medium"
+                        class="mt-1.5 text-xs text-error font-medium"
                     >
                         {{ form.errors.sleep_duration }}
                     </p>
                 </div>
 
-                <!-- Custom Interactive Mood Selection Block -->
                 <div
-                    class="rounded-2xl bg-gradient-to-br from-[#1b342b]/40 to-[#12221c]/40 p-4 border border-emerald-500/10"
+                    class="rounded-2xl bg-success/5 p-4 border border-success/10"
                 >
                     <label
-                        class="text-xs font-bold uppercase tracking-wider text-emerald-300/80 block mb-3"
+                        class="text-xs font-bold uppercase tracking-wider text-success block mb-3"
                     >
                         Select Mood Status
                     </label>
                     <div class="flex items-center justify-between px-2">
-                        <!-- Choice 1: Sad Face -->
                         <button
                             type="button"
                             @click="form.mood = 1"
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 1
-                                    ? 'border-emerald-500 bg-emerald-500/20 scale-110 text-emerald-400 shadow-lg'
-                                    : 'border-transparent text-gray-600 hover:text-gray-400',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
+                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
                             ]"
                         >
                             <svg
@@ -342,15 +339,14 @@ function handleWeightInput(event: Event): void {
                             </svg>
                         </button>
 
-                        <!-- Choice 2: Neutral Face -->
                         <button
                             type="button"
                             @click="form.mood = 2"
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 2
-                                    ? 'border-emerald-500 bg-emerald-500/20 scale-110 text-emerald-400 shadow-lg'
-                                    : 'border-transparent text-gray-600 hover:text-gray-400',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
+                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
                             ]"
                         >
                             <svg
@@ -370,15 +366,14 @@ function handleWeightInput(event: Event): void {
                             </svg>
                         </button>
 
-                        <!-- Choice 3: Happy Face -->
                         <button
                             type="button"
                             @click="form.mood = 3"
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 3
-                                    ? 'border-emerald-500 bg-emerald-500/20 scale-110 text-emerald-400 shadow-lg'
-                                    : 'border-transparent text-gray-600 hover:text-gray-400',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
+                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
                             ]"
                         >
                             <svg
@@ -398,15 +393,14 @@ function handleWeightInput(event: Event): void {
                             </svg>
                         </button>
 
-                        <!-- Choice 4: Very Happy / Open Grin Face -->
                         <button
                             type="button"
                             @click="form.mood = 4"
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 4
-                                    ? 'border-emerald-500 bg-emerald-500/20 scale-110 text-emerald-400 shadow-lg'
-                                    : 'border-transparent text-gray-600 hover:text-gray-400',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
+                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
                             ]"
                         >
                             <svg
@@ -430,9 +424,9 @@ function handleWeightInput(event: Event): void {
 
                 <div class="flex items-center justify-between gap-6 px-1">
                     <div
-                        class="flex items-center justify-between flex-1 bg-gray-900 border border-gray-800 rounded-2xl p-4"
+                        class="flex items-center justify-between flex-1 bg-base-200 border border-base-300 rounded-2xl p-4 transition-colors duration-200"
                     >
-                        <span class="text-sm font-medium text-gray-300"
+                        <span class="text-sm font-medium text-base-content/80"
                             >Workout</span
                         >
                         <button
@@ -440,7 +434,7 @@ function handleWeightInput(event: Event): void {
                             @click="form.workout = !form.workout"
                             :class="[
                                 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none',
-                                form.workout ? 'bg-emerald-500' : 'bg-gray-700',
+                                form.workout ? 'bg-success' : 'bg-base-300',
                             ]"
                         >
                             <span
@@ -455,9 +449,9 @@ function handleWeightInput(event: Event): void {
                     </div>
 
                     <div
-                        class="flex items-center justify-between flex-1 bg-gray-900 border border-gray-800 rounded-2xl p-4"
+                        class="flex items-center justify-between flex-1 bg-base-200 border border-base-300 rounded-2xl p-4 transition-colors duration-200"
                     >
-                        <span class="text-sm font-medium text-gray-300"
+                        <span class="text-sm font-medium text-base-content/80"
                             >Cardio</span
                         >
                         <button
@@ -465,7 +459,7 @@ function handleWeightInput(event: Event): void {
                             @click="form.cardio = !form.cardio"
                             :class="[
                                 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none',
-                                form.cardio ? 'bg-emerald-500' : 'bg-gray-700',
+                                form.cardio ? 'bg-success' : 'bg-base-300',
                             ]"
                         >
                             <span
@@ -482,7 +476,7 @@ function handleWeightInput(event: Event): void {
 
                 <div>
                     <label
-                        class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-400 mb-2"
+                        class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-base-content/70 mb-2"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -490,7 +484,7 @@ function handleWeightInput(event: Event): void {
                             viewBox="0 0 24 24"
                             stroke-width="2"
                             stroke="currentColor"
-                            class="h-4 w-4 text-gray-500"
+                            class="h-4 w-4 text-base-content/50"
                         >
                             <path
                                 stroke-linecap="round"
@@ -503,31 +497,31 @@ function handleWeightInput(event: Event): void {
                     <textarea
                         rows="3"
                         v-model="form.notes"
-                        class="w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-sm text-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors placeholder-gray-600 resize-none"
+                        class="w-full rounded-xl border border-base-300 bg-base-200 px-4 py-3 text-sm text-base-content focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-200 placeholder-base-content/40 resize-none"
                         placeholder="Sore muscles, felt good after tracking..."
                     />
                     <p
                         v-if="form.errors.notes"
-                        class="mt-1.5 text-xs text-rose-500 font-medium"
+                        class="mt-1.5 text-xs text-error font-medium"
                     >
                         {{ form.errors.notes }}
                     </p>
                 </div>
 
                 <div
-                    class="flex items-center justify-end gap-3 pt-4 border-t border-gray-800"
+                    class="flex items-center justify-end gap-3 pt-4 border-t border-base-300"
                 >
                     <button
                         type="button"
                         @click="emit('close')"
-                        class="rounded-xl border border-gray-800 bg-transparent px-4 py-2.5 text-sm font-semibold text-gray-400 hover:bg-gray-900 hover:text-white transition-colors"
+                        class="rounded-xl border border-base-300 bg-transparent px-4 py-2.5 text-sm font-semibold text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
                         :disabled="form.processing"
                     >
                         Cancel
                     </button>
                     <button
                         type="submit"
-                        class="rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors disabled:opacity-50"
+                        class="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-content shadow-sm hover:bg-primary/90 transition-colors duration-200 disabled:opacity-50"
                         :disabled="form.processing"
                     >
                         {{ form.processing ? "Saving..." : "Save Entry" }}

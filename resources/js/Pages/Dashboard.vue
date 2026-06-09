@@ -44,25 +44,27 @@ function handleDeleteInitiated(id: number): void {
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <div class="py-12 bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div class="py-12 min-h-screen transition-colors duration-200">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div
                     class="flex items-center justify-between mb-8 px-4 sm:px-0"
                 >
                     <div>
                         <h1
-                            class="text-2xl font-bold text-gray-900 dark:text-gray-100"
+                            class="text-2xl font-bold text-base-content transition-colors duration-200"
                         >
                             Health Tracker
                         </h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p
+                            class="text-sm text-base-content/70 transition-colors duration-200"
+                        >
                             Manage your daily physical metrics
                         </p>
                     </div>
 
                     <button
                         @click="openCreateModal"
-                        class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors duration-200"
+                        class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-content shadow-sm hover:bg-primary/90 transition-all duration-200"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -99,10 +101,10 @@ function handleDeleteInitiated(id: number): void {
 
                 <div
                     v-else
-                    class="text-center py-16 bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 mx-4 sm:mx-0"
+                    class="text-center py-16 bg-base-100 rounded-2xl border border-dashed border-base-300 mx-4 sm:mx-0 transition-colors duration-200"
                 >
                     <svg
-                        class="mx-auto h-12 w-12 text-gray-400"
+                        class="mx-auto h-12 w-12 text-base-content/40"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -116,18 +118,19 @@ function handleDeleteInitiated(id: number): void {
                         />
                     </svg>
                     <h3
-                        class="mt-2 text-sm font-semibold text-gray-900 dark:text-gray-100"
+                        class="mt-2 text-sm font-semibold text-base-content transition-colors duration-200"
                     >
                         No logs recorded
                     </h3>
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p
+                        class="mt-1 text-sm text-base-content/60 transition-colors duration-200"
+                    >
                         Get started by adding your health stats for today.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Integrated Interactive Entry Manipulation Layer -->
         <StatCardModal
             :is-open="isModalOpen"
             :stat="activeEditingStat"

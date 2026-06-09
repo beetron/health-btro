@@ -43,37 +43,35 @@ const avatarInitial = computed((): string => {
 
 <template>
     <div
-        class="flex flex-col gap-4 rounded-3xl bg-[#12141c] p-5 text-white shadow-xl border border-gray-800/40 w-full max-w-sm mx-auto"
+        class="flex flex-col gap-4 rounded-3xl bg-base-100 p-5 text-base-content shadow-xl border border-base-300/60 w-full max-w-sm mx-auto transition-all duration-200"
     >
-        <!-- Top Section: Profile info & Top-Aligned Primary Edit Action -->
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <img
                     v-if="avatarPath"
                     :src="avatarPath"
                     alt="User Avatar"
-                    class="h-10 w-10 rounded-full object-cover border border-gray-700"
+                    class="h-10 w-10 rounded-full object-cover border border-base-300"
                 />
                 <div
                     v-else
-                    class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white uppercase border border-indigo-500/30 shadow-inner"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-content uppercase border border-primary/30 shadow-inner"
                 >
                     {{ avatarInitial }}
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xs font-semibold text-gray-400"
+                    <span class="text-xs font-semibold text-base-content/60"
                         >@{{ username }}</span
                     >
-                    <span class="text-sm font-medium text-gray-200">{{
+                    <span class="text-sm font-medium text-base-content">{{
                         formattedDate
                     }}</span>
                 </div>
             </div>
 
-            <!-- Prominent High-Frequency Edit Action Button -->
             <button
                 @click="emit('edit', stat)"
-                class="flex items-center gap-1 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors bg-indigo-500/10 px-2.5 py-1 rounded-xl"
+                class="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80 transition-colors bg-primary/10 px-2.5 py-1 rounded-xl"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -93,57 +91,54 @@ const avatarInitial = computed((): string => {
             </button>
         </div>
 
-        <!-- Weight & Body Fat Segment -->
         <div
-            class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#4d394e] to-[#2b2235] p-4 border border-purple-500/10"
+            class="relative overflow-hidden rounded-2xl bg-secondary/10 p-4 border border-secondary/20 transition-colors duration-200"
         >
             <span
-                class="text-xs font-bold uppercase tracking-wider text-purple-300/70"
+                class="text-xs font-bold uppercase tracking-wider text-secondary"
                 >Weight & Body Fat</span
             >
             <div class="mt-2 flex items-baseline justify-between">
                 <div>
-                    <span class="text-3xl font-extrabold tracking-tight">{{
-                        stat.body_weight
-                    }}</span>
-                    <span class="ml-1 text-sm font-semibold text-purple-300"
+                    <span
+                        class="text-3xl font-extrabold tracking-tight text-base-content"
+                        >{{ stat.body_weight }}</span
+                    >
+                    <span class="ml-1 text-sm font-semibold text-secondary"
                         >kg</span
                     >
                 </div>
                 <div>
                     <span
-                        class="text-2xl font-bold tracking-tight text-purple-200"
+                        class="text-2xl font-bold tracking-tight text-base-content/90"
                         >{{ stat.body_fat }}</span
                     >
-                    <span class="ml-0.5 text-sm font-semibold text-purple-300"
+                    <span class="ml-0.5 text-sm font-semibold text-secondary"
                         >%</span
                     >
                 </div>
             </div>
         </div>
 
-        <!-- Sleep Tracking Segment -->
         <div
-            class="rounded-2xl bg-gradient-to-br from-[#243547] to-[#16222f] p-4 border border-blue-500/10"
+            class="rounded-2xl bg-info/10 p-4 border border-info/20 transition-colors duration-200"
         >
-            <span
-                class="text-xs font-bold uppercase tracking-wider text-blue-300/70"
+            <span class="text-xs font-bold uppercase tracking-wider text-info"
                 >Sleep Duration</span
             >
             <div class="mt-1">
                 <span
-                    class="text-3xl font-extrabold tracking-tight text-[#62bbf4]"
+                    class="text-3xl font-extrabold tracking-tight text-info"
                     >{{ formattedSleep }}</span
                 >
             </div>
         </div>
 
-        <!-- Mood Indicator Segment -->
         <div
-            class="rounded-2xl bg-gradient-to-br from-[#1b342b] to-[#12221c] p-4 border border-emerald-500/10"
+            class="rounded-2xl bg-success/10 p-4 border border-success/20 transition-colors duration-200"
         >
             <span
-                class="text-xs font-bold uppercase tracking-wider text-emerald-300/70"
+                class="text-xs font-bold uppercase tracking-wider text-success"
                 >Mood</span
             >
             <div class="mt-3 flex items-center justify-around">
@@ -151,8 +146,8 @@ const avatarInitial = computed((): string => {
                     :class="[
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 1
-                            ? 'bg-emerald-500/20 scale-110 text-emerald-400'
-                            : 'text-gray-600',
+                            ? 'bg-success/20 scale-110 text-success'
+                            : 'text-base-content/30',
                     ]"
                 >
                     <svg
@@ -175,8 +170,8 @@ const avatarInitial = computed((): string => {
                     :class="[
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 2
-                            ? 'bg-emerald-500/20 scale-110 text-emerald-400'
-                            : 'text-gray-600',
+                            ? 'bg-success/20 scale-110 text-success'
+                            : 'text-base-content/30',
                     ]"
                 >
                     <svg
@@ -199,8 +194,8 @@ const avatarInitial = computed((): string => {
                     :class="[
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 3
-                            ? 'bg-emerald-500/20 scale-110 text-emerald-400'
-                            : 'text-gray-600',
+                            ? 'bg-success/20 scale-110 text-success'
+                            : 'text-base-content/30',
                     ]"
                 >
                     <svg
@@ -223,8 +218,8 @@ const avatarInitial = computed((): string => {
                     :class="[
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 4
-                            ? 'bg-emerald-500/20 scale-110 text-emerald-400'
-                            : 'text-gray-600',
+                            ? 'bg-success/20 scale-110 text-success'
+                            : 'text-base-content/30',
                     ]"
                 >
                     <svg
@@ -252,27 +247,26 @@ const avatarInitial = computed((): string => {
             </div>
         </div>
 
-        <!-- Activity Toggles Status Display -->
         <div class="flex flex-col gap-2.5 px-1 py-1">
             <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-400 font-medium">Workout</span>
+                <span class="text-base-content/60 font-medium">Workout</span>
                 <span
                     :class="
                         stat.workout
-                            ? 'text-emerald-400 font-semibold'
-                            : 'text-gray-500 font-medium'
+                            ? 'text-success font-semibold'
+                            : 'text-base-content/40 font-medium'
                     "
                 >
                     {{ stat.workout ? "Yes" : "No" }}
                 </span>
             </div>
             <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-400 font-medium">Cardio</span>
+                <span class="text-base-content/60 font-medium">Cardio</span>
                 <span
                     :class="
                         stat.cardio
-                            ? 'text-emerald-400 font-semibold'
-                            : 'text-gray-500 font-medium'
+                            ? 'text-success font-semibold'
+                            : 'text-base-content/40 font-medium'
                     "
                 >
                     {{ stat.cardio ? "Yes" : "No" }}
@@ -280,27 +274,25 @@ const avatarInitial = computed((): string => {
             </div>
         </div>
 
-        <!-- Notes Layer with Text Layout Elements only -->
         <div
-            class="mt-1 flex flex-col gap-1.5 rounded-2xl bg-gray-900/60 p-3.5 border border-gray-800/60"
+            class="mt-1 flex flex-col gap-1.5 rounded-2xl bg-base-200/60 p-3.5 border border-base-300/60 transition-colors duration-200"
         >
             <div
-                class="text-xs font-bold uppercase tracking-wider text-gray-500"
+                class="text-xs font-bold uppercase tracking-wider text-base-content/50"
             >
                 <span>Notes</span>
             </div>
             <p
-                class="text-sm text-gray-300 leading-relaxed line-clamp-3 whitespace-pre-line"
+                class="text-sm text-base-content/80 leading-relaxed line-clamp-3 whitespace-pre-line"
             >
                 {{ stat.notes || "No notes added for this day." }}
             </p>
         </div>
 
-        <!-- Bottom Actions Row: Subdued Low-Frequency Delete Action -->
         <div class="flex justify-end mt-1 px-1">
             <button
                 @click="emit('delete', stat.id)"
-                class="flex items-center gap-1 text-xs font-semibold text-rose-500/70 hover:text-rose-400 transition-colors bg-rose-500/5 hover:bg-rose-500/10 px-2.5 py-1.5 rounded-xl border border-rose-500/10"
+                class="flex items-center gap-1 text-xs font-semibold text-error/80 hover:text-error transition-colors bg-error/5 hover:bg-error/10 px-2.5 py-1.5 rounded-xl border border-error/10"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
