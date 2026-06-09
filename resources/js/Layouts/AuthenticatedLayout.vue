@@ -1,3 +1,4 @@
+// AuthenticatedLayout.vue
 <script setup lang="ts">
 import { ref } from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";

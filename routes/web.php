@@ -33,6 +33,7 @@ Route::get('/dashboard', [DailyStatController::class, 'index'])->middleware(['au
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/daily-stats', [DailyStatController::class, 'store'])->name('daily-stats.store');
     Route::put('/daily-stats/{daily_stat}', [DailyStatController::class, 'update'])->name('daily-stats.update');
+    Route::delete('/daily-stats/{daily_stat}', [DailyStatController::class, 'destroy'])->name('daily-stats.destroy');
 });
 
 Route::get('/charts', function () {

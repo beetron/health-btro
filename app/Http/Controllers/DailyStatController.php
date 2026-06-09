@@ -52,4 +52,19 @@ class DailyStatController extends Controller
 
         return redirect()->back()->with('success', 'Daily log entry updated successfully.');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(\App\Models\DailyStat $dailyStat): \Illuminate\Http\RedirectResponse
+    {
+        // Prevent users from deleting someone else's log data
+        if ($dailyStat->user_id !== \Illuminate\Support\Facades\Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $dailyStat->delete();
+
+        return redirect()->back()->with('success', 'Daily log entry deleted successfully.');
+    }
 }
