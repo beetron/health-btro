@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DailyStatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -25,17 +26,18 @@ Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 })->name('register');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Updated to route through DailyStatController to load database entries
+Route::get('/dashboard', [DailyStatController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// Endpoints for processing tracking entry submissions and updates
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/daily-stats', [DailyStatController::class, 'store'])->name('daily-stats.store');
+    Route::put('/daily-stats/{daily_stat}', [DailyStatController::class, 'update'])->name('daily-stats.update');
+});
 
 Route::get('/charts', function () {
     return Inertia::render('Charts');
 })->middleware(['auth', 'verified'])->name('charts');
-
-Route::get('/settings', function () {
-    return Inertia::render('Settings');
-})->middleware(['auth', 'verified'])->name('settings');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
