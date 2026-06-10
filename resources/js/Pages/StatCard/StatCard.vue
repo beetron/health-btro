@@ -43,7 +43,7 @@ const avatarInitial = computed((): string => {
 
 <template>
     <div
-        class="flex flex-col gap-4 rounded-3xl bg-base-100 p-5 text-base-content shadow-xl border border-base-300/60 w-full max-w-sm mx-auto transition-all duration-200"
+        class="flex flex-col gap-4 rounded-3xl bg-base-100 p-5 text-base-content shadow-md border border-base-300 w-full max-w-sm mx-auto transition-all duration-200"
     >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -55,12 +55,12 @@ const avatarInitial = computed((): string => {
                 />
                 <div
                     v-else
-                    class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-content uppercase border border-primary/30 shadow-inner"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-content uppercase border border-primary/20 shadow-inner"
                 >
                     {{ avatarInitial }}
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xs font-semibold text-base-content/60"
+                    <span class="text-xs font-semibold text-base-content/50"
                         >@{{ username }}</span
                     >
                     <span class="text-sm font-medium text-base-content">{{
@@ -92,7 +92,7 @@ const avatarInitial = computed((): string => {
         </div>
 
         <div
-            class="relative overflow-hidden rounded-2xl bg-secondary/10 p-4 border border-secondary/20 transition-colors duration-200"
+            class="relative overflow-hidden rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-secondary transition-colors duration-200"
         >
             <span
                 class="text-xs font-bold uppercase tracking-wider text-secondary"
@@ -110,7 +110,7 @@ const avatarInitial = computed((): string => {
                 </div>
                 <div>
                     <span
-                        class="text-2xl font-bold tracking-tight text-base-content/90"
+                        class="text-2xl font-bold tracking-tight text-base-content"
                         >{{ stat.body_fat }}</span
                     >
                     <span class="ml-0.5 text-sm font-semibold text-secondary"
@@ -121,7 +121,7 @@ const avatarInitial = computed((): string => {
         </div>
 
         <div
-            class="rounded-2xl bg-info/10 p-4 border border-info/20 transition-colors duration-200"
+            class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-info transition-colors duration-200"
         >
             <span class="text-xs font-bold uppercase tracking-wider text-info"
                 >Sleep Duration</span
@@ -135,7 +135,7 @@ const avatarInitial = computed((): string => {
         </div>
 
         <div
-            class="rounded-2xl bg-success/10 p-4 border border-success/20 transition-colors duration-200"
+            class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-success transition-colors duration-200"
         >
             <span
                 class="text-xs font-bold uppercase tracking-wider text-success"
@@ -147,7 +147,7 @@ const avatarInitial = computed((): string => {
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 1
                             ? 'bg-success/20 scale-110 text-success'
-                            : 'text-base-content/30',
+                            : 'text-base-content/20',
                     ]"
                 >
                     <svg
@@ -171,7 +171,7 @@ const avatarInitial = computed((): string => {
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 2
                             ? 'bg-success/20 scale-110 text-success'
-                            : 'text-base-content/30',
+                            : 'text-base-content/20',
                     ]"
                 >
                     <svg
@@ -195,7 +195,7 @@ const avatarInitial = computed((): string => {
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 3
                             ? 'bg-success/20 scale-110 text-success'
-                            : 'text-base-content/30',
+                            : 'text-base-content/20',
                     ]"
                 >
                     <svg
@@ -219,7 +219,7 @@ const avatarInitial = computed((): string => {
                         'p-1.5 rounded-xl transition-all duration-200',
                         stat.mood === 4
                             ? 'bg-success/20 scale-110 text-success'
-                            : 'text-base-content/30',
+                            : 'text-base-content/20',
                     ]"
                 >
                     <svg
@@ -275,10 +275,10 @@ const avatarInitial = computed((): string => {
         </div>
 
         <div
-            class="mt-1 flex flex-col gap-1.5 rounded-2xl bg-base-200/60 p-3.5 border border-base-300/60 transition-colors duration-200"
+            class="mt-1 flex flex-col gap-1.5 rounded-2xl bg-base-200 p-3.5 border border-base-300 transition-colors duration-200"
         >
             <div
-                class="text-xs font-bold uppercase tracking-wider text-base-content/50"
+                class="text-xs font-bold uppercase tracking-wider text-base-content/40"
             >
                 <span>Notes</span>
             </div>
@@ -295,7 +295,7 @@ const avatarInitial = computed((): string => {
                 class="flex items-center gap-1 text-xs font-semibold text-error/80 hover:text-error transition-colors bg-error/5 hover:bg-error/10 px-2.5 py-1.5 rounded-xl border border-error/10"
             >
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns="http://www.w3.org/2000/xl"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="2"

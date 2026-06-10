@@ -86,7 +86,6 @@ function submitForm(): void {
     }
 }
 
-// Sanitization filters applied dynamically to incoming raw user entry strings
 function handleWeightInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     // Strip out all characters except digits and solitary decimal points
@@ -142,7 +141,7 @@ function handleWeightInput(event: Event): void {
                 </h2>
                 <button
                     @click="emit('close')"
-                    class="rounded-xl p-1.5 text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
+                    class="rounded-xl p-1.5 text-base-content/60 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +162,7 @@ function handleWeightInput(event: Event): void {
 
             <form
                 @submit.prevent="submitForm"
-                class="p-6 space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar"
+                class="p-6 space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar bg-base-100"
             >
                 <div>
                     <label
@@ -200,7 +199,7 @@ function handleWeightInput(event: Event): void {
                 </div>
 
                 <div
-                    class="grid grid-cols-2 gap-4 rounded-2xl bg-secondary/5 p-4 border border-secondary/10"
+                    class="grid grid-cols-2 gap-4 rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-secondary shadow-sm transition-colors duration-200"
                 >
                     <div>
                         <label
@@ -247,7 +246,9 @@ function handleWeightInput(event: Event): void {
                     </div>
                 </div>
 
-                <div class="rounded-2xl bg-info/5 p-4 border border-info/10">
+                <div
+                    class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-info shadow-sm transition-colors duration-200"
+                >
                     <label
                         class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-info mb-3"
                     >
@@ -304,7 +305,7 @@ function handleWeightInput(event: Event): void {
                 </div>
 
                 <div
-                    class="rounded-2xl bg-success/5 p-4 border border-success/10"
+                    class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-success shadow-sm transition-colors duration-200"
                 >
                     <label
                         class="text-xs font-bold uppercase tracking-wider text-success block mb-3"
@@ -318,8 +319,8 @@ function handleWeightInput(event: Event): void {
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 1
-                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
-                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-md'
+                                    : 'border-transparent text-base-content/30 hover:text-base-content/60',
                             ]"
                         >
                             <svg
@@ -345,8 +346,8 @@ function handleWeightInput(event: Event): void {
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 2
-                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
-                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-md'
+                                    : 'border-transparent text-base-content/30 hover:text-base-content/60',
                             ]"
                         >
                             <svg
@@ -372,8 +373,8 @@ function handleWeightInput(event: Event): void {
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 3
-                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
-                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-md'
+                                    : 'border-transparent text-base-content/30 hover:text-base-content/60',
                             ]"
                         >
                             <svg
@@ -399,8 +400,8 @@ function handleWeightInput(event: Event): void {
                             :class="[
                                 'p-2 rounded-2xl border transition-all duration-200',
                                 form.mood === 4
-                                    ? 'border-success bg-success/20 scale-110 text-success shadow-lg'
-                                    : 'border-transparent text-base-content/40 hover:text-base-content/70',
+                                    ? 'border-success bg-success/20 scale-110 text-success shadow-md'
+                                    : 'border-transparent text-base-content/30 hover:text-base-content/60',
                             ]"
                         >
                             <svg
@@ -484,7 +485,7 @@ function handleWeightInput(event: Event): void {
                             viewBox="0 0 24 24"
                             stroke-width="2"
                             stroke="currentColor"
-                            class="h-4 w-4 text-base-content/50"
+                            class="h-4 w-4 text-base-content/40"
                         >
                             <path
                                 stroke-linecap="round"
@@ -521,7 +522,7 @@ function handleWeightInput(event: Event): void {
                     </button>
                     <button
                         type="submit"
-                        class="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-content shadow-sm hover:bg-primary/90 transition-colors duration-200 disabled:opacity-50"
+                        class="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-content shadow hover:bg-primary/90 transition-colors duration-200 disabled:opacity-50"
                         :disabled="form.processing"
                     >
                         {{ form.processing ? "Saving..." : "Save Entry" }}

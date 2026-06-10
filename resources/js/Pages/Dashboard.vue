@@ -44,7 +44,9 @@ function handleDeleteInitiated(id: number): void {
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <div class="py-12 min-h-screen transition-colors duration-200">
+        <div
+            class="py-12 bg-base-200 min-h-screen transition-colors duration-200"
+        >
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div
                     class="flex items-center justify-between mb-8 px-4 sm:px-0"
@@ -56,7 +58,7 @@ function handleDeleteInitiated(id: number): void {
                             Health Tracker
                         </h1>
                         <p
-                            class="text-sm text-base-content/70 transition-colors duration-200"
+                            class="text-sm text-base-content/60 transition-colors duration-200"
                         >
                             Manage your daily physical metrics
                         </p>
@@ -64,7 +66,7 @@ function handleDeleteInitiated(id: number): void {
 
                     <button
                         @click="openCreateModal"
-                        class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-content shadow-sm hover:bg-primary/90 transition-all duration-200"
+                        class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-content shadow hover:bg-primary/90 transition-all duration-200"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +106,7 @@ function handleDeleteInitiated(id: number): void {
                     class="text-center py-16 bg-base-100 rounded-2xl border border-dashed border-base-300 mx-4 sm:mx-0 transition-colors duration-200"
                 >
                     <svg
-                        class="mx-auto h-12 w-12 text-base-content/40"
+                        class="mx-auto h-12 w-12 text-base-content/30"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -123,7 +125,7 @@ function handleDeleteInitiated(id: number): void {
                         No logs recorded
                     </h3>
                     <p
-                        class="mt-1 text-sm text-base-content/60 transition-colors duration-200"
+                        class="mt-1 text-sm text-base-content/50 transition-colors duration-200"
                     >
                         Get started by adding your health stats for today.
                     </p>
