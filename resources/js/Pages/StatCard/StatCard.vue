@@ -285,7 +285,7 @@ const avatarInitial = computed((): string => {
             <p
                 class="text-sm text-base-content/80 leading-relaxed line-clamp-3 whitespace-pre-line"
             >
-                {{ stat.notes || "No notes added for this day." }}
+                {{ stat.notes || "" }}
             </p>
         </div>
 

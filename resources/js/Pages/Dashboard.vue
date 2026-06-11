@@ -1,15 +1,23 @@
-// Dashboard.vue
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, usePage, router } from "@inertiajs/vue3";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import type { DailyStat } from "@/Types/dailystat";
 import type { PageProps } from "@/Types/user";
 import StatCard from "@/Pages/StatCard/StatCard.vue";
 import StatCardModal from "@/Pages/StatCard/StatCardModal.vue";
 
+interface AvailableMonth {
+    value: string;
+    label: string;
+}
+
 const props = defineProps<{
     dailyStats: DailyStat[];
+    filters: {
+        month: string;
+    };
+    availableMonths: AvailableMonth[];
 }>();
 
 const page = usePage<PageProps>();
@@ -19,6 +27,30 @@ const user = computed(() => page.props.auth.user);
 
 const isModalOpen = ref(false);
 const activeEditingStat = ref<DailyStat | null>(null);
+
+// Tracks the selected filter element bound value
+const selectedMonthFilter = ref(props.filters.month);
+
+// Sync local reactive state if filters change upstream via alternative navigations
+watch(
+    () => props.filters.month,
+    (newMonth) => {
+        selectedMonthFilter.value = newMonth;
+    },
+);
+
+// Triggers an evaluation partial reload query back to the dashboard route
+function handleMonthChange(): void {
+    router.get(
+        route("dashboard"),
+        { month: selectedMonthFilter.value },
+        {
+            preserveState: true,
+            preserveScroll: true,
+            only: ["dailyStats", "filters"],
+        },
+    );
+}
 
 function openCreateModal(): void {
     activeEditingStat.value = null;
@@ -49,7 +81,7 @@ function handleDeleteInitiated(id: number): void {
         >
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div
-                    class="flex items-center justify-between mb-8 px-4 sm:px-0"
+                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 px-4 sm:px-0"
                 >
                     <div>
                         <h1
@@ -64,26 +96,47 @@ function handleDeleteInitiated(id: number): void {
                         </p>
                     </div>
 
-                    <button
-                        @click="openCreateModal"
-                        class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-content shadow hover:bg-primary/90 transition-all duration-200"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="2.5"
-                            stroke="currentColor"
-                            class="h-5 w-5"
+                    <div class="flex items-center gap-3 self-end sm:self-auto">
+                        <div
+                            v-if="props.availableMonths.length > 0"
+                            class="form-control"
                         >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M12 4.5v15m7.5-7.5h-15"
-                            />
-                        </svg>
-                        <span>Add</span>
-                    </button>
+                            <select
+                                v-model="selectedMonthFilter"
+                                @change="handleMonthChange"
+                                class="select select-bordered rounded-xl bg-base-100 shadow-sm font-medium text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 pl-5 pr-10 min-w-[160px]"
+                            >
+                                <option
+                                    v-for="item in props.availableMonths"
+                                    :key="item.value"
+                                    :value="item.value"
+                                >
+                                    {{ item.label }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <button
+                            @click="openCreateModal"
+                            class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-content shadow hover:bg-primary/90 transition-all duration-200"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2.5"
+                                stroke="currentColor"
+                                class="h-5 w-5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 4.5v15m7.5-7.5h-15"
+                                />
+                            </svg>
+                            <span>Add</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div
@@ -122,12 +175,13 @@ function handleDeleteInitiated(id: number): void {
                     <h3
                         class="mt-2 text-sm font-semibold text-base-content transition-colors duration-200"
                     >
-                        No logs recorded
+                        No logs recorded for this period
                     </h3>
                     <p
                         class="mt-1 text-sm text-base-content/50 transition-colors duration-200"
                     >
-                        Get started by adding your health stats for today.
+                        Try selecting an alternative month above or add a new
+                        metric.
                     </p>
                 </div>
             </div>
