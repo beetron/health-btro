@@ -139,28 +139,52 @@ function handleWeightInput(event: Event): void {
                 <h2 class="text-xl font-bold tracking-tight">
                     {{ stat ? "Edit Daily Log" : "Add Daily Log" }}
                 </h2>
-                <button
-                    @click="emit('close')"
-                    class="rounded-xl p-1.5 text-base-content/60 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="2.5"
-                        stroke="currentColor"
-                        class="h-5 w-5"
+
+                <div class="flex items-center gap-3">
+                    <button
+                        type="button"
+                        @click="emit('close')"
+                        class="rounded-xl border border-base-300 bg-transparent px-4 py-2 text-sm font-semibold text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
+                        :disabled="form.processing"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                        />
-                    </svg>
-                </button>
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        form="daily-stat-form"
+                        class="rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-content shadow hover:bg-primary/90 transition-colors duration-200 disabled:opacity-50"
+                        :disabled="form.processing"
+                    >
+                        {{ form.processing ? "Saving..." : "Save Entry" }}
+                    </button>
+
+                    <div class="w-px h-5 bg-base-300 ml-1"></div>
+
+                    <button
+                        type="button"
+                        @click="emit('close')"
+                        class="rounded-xl p-1.5 text-base-content/60 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2.5"
+                            stroke="currentColor"
+                            class="h-5 w-5"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <form
+                id="daily-stat-form"
                 @submit.prevent="submitForm"
                 class="p-6 space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar bg-base-100"
             >
@@ -507,26 +531,6 @@ function handleWeightInput(event: Event): void {
                     >
                         {{ form.errors.notes }}
                     </p>
-                </div>
-
-                <div
-                    class="flex items-center justify-end gap-3 pt-4 border-t border-base-300"
-                >
-                    <button
-                        type="button"
-                        @click="emit('close')"
-                        class="rounded-xl border border-base-300 bg-transparent px-4 py-2.5 text-sm font-semibold text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors duration-200"
-                        :disabled="form.processing"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        class="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-content shadow hover:bg-primary/90 transition-colors duration-200 disabled:opacity-50"
-                        :disabled="form.processing"
-                    >
-                        {{ form.processing ? "Saving..." : "Save Entry" }}
-                    </button>
                 </div>
             </form>
         </div>

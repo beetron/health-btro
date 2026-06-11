@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DailyStatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -36,9 +37,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/daily-stats/{daily_stat}', [DailyStatController::class, 'destroy'])->name('daily-stats.destroy');
 });
 
-Route::get('/charts', function () {
-    return Inertia::render('Charts');
-})->middleware(['auth', 'verified'])->name('charts');
+Route::get('/charts', ChartController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('charts');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
