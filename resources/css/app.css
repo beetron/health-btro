@@ -1,6 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* --------------------------------------------------------
+   TAILWIND V4 COMPILER SCANNING TARGETS (Replaces config content array)
+   Paths are relative from resources/css/ directory
+   -------------------------------------------------------- */
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+@source "../views/**/*.blade.php";
+@source "../js/**/*.vue";
+@source "../js/**/*.ts";
+
+/* --------------------------------------------------------
+   APPLICATION THEME CUSTOMIZATIONS (Replaces config theme extend)
+   -------------------------------------------------------- */
+@theme {
+    --font-sans: "Figtree", var(--font-sans);
+}
 
 @layer base {
     /* --------------------------------------------------------
