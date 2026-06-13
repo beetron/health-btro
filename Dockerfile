@@ -51,7 +51,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     zip \
     unzip \
-    curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configure and install required PHP extensions
@@ -100,6 +99,11 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framewor
     && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
+# Compile production caches during build phase using a dummy key placeholder
+# This allows building immutable cache files into the read-only layer without a runtime .env file
+RUN APP_KEY=base64:dummypasstextforbuildstepscompileonly123= APP_ENV=production php artisan route:cache \
+    && APP_KEY=base64:dummypasstextforbuildstepscompileonly123= APP_ENV=production php artisan view:cache
+
 # Reconfigure Nginx workspace directories to allow read/write execution permissions for non-root users
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
@@ -112,9 +116,6 @@ USER www-data
 # Expose internal unprivileged service port
 EXPOSE 8080
 
-# Kubernetes container lifecycle health check integration targeting the custom endpoint
-HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \
-    CMD curl -f http://localhost:8080/healthz || exit 1
-
-# Warm up production caches using the mounted Kubernetes environment variables before starting processes
-CMD ["sh", "-c", "php artisan config:cache && php artisan route:cache && php artisan view:cache && /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf"]
+# Hand off process management directly to Supervisor
+# The config cache will read environment values directly from the mounted file at runtime
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
