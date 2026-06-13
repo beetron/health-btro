@@ -77,7 +77,6 @@ nodaemon=true
 logfile=/dev/null
 logfile_maxbytes=0
 pidfile=/tmp/supervisord.pid
-user=www-data
 
 [program:php-fpm]
 command=php-fpm
