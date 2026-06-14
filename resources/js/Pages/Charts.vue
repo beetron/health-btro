@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, router } from "@inertiajs/vue3";
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, onUnmounted, watch, computed } from "vue";
 import { Chart, registerables } from "chart.js";
 import type { DailyStat } from "@/Types/dailystat";
 
@@ -37,6 +37,10 @@ const visibilitySettings = ref({
     cardio: false,
 });
 
+const windowWidth = ref(window.innerWidth);
+function handleResize() { windowWidth.value = window.innerWidth; }
+const isMobile = computed(() => windowWidth.value < 640);
+
 // Chronologically sorted records ensuring line charts read oldest to newest
 const sortedDailyStats = computed(() => {
     return [...props.dailyStats].sort((a, b) => {
@@ -53,7 +57,7 @@ const chartLabels = computed(() => {
         return date.toLocaleDateString("en-US", {
             month: "short",
             day: "numeric",
-            year: "2-digit",
+            ...(isMobile.value ? {} : { year: "2-digit" }),
             timeZone: "UTC",
         });
     });
@@ -160,35 +164,39 @@ function initializeChart(): void {
             },
             scales: {
                 x: {
-                    grid: {
-                        display: false,
-                    },
+                    grid: { display: false },
+                    ticks: isMobile.value
+                        ? { maxTicksLimit: 5, maxRotation: 45, minRotation: 45, font: { size: 10 } }
+                        : {},
                 },
                 yWeight: {
                     type: "linear",
                     position: "left",
-                    title: { display: true, text: "Weight (kg)" },
+                    title: { display: !isMobile.value, text: "Weight (kg)" },
+                    ticks: isMobile.value ? { font: { size: 10 } } : {},
                 },
                 yPercent: {
                     type: "linear",
                     position: "right",
-                    title: { display: true, text: "Body Fat (%)" },
+                    title: { display: !isMobile.value, text: "Body Fat (%)" },
                     grid: { drawOnChartArea: false },
+                    ticks: isMobile.value ? { font: { size: 10 } } : {},
                 },
                 yHours: {
                     type: "linear",
                     position: "left",
-                    title: { display: true, text: "Sleep (h)" },
+                    title: { display: !isMobile.value, text: "Sleep (h)" },
                     grid: { drawOnChartArea: false },
+                    ticks: isMobile.value ? { font: { size: 10 } } : {},
                 },
                 yMood: {
                     type: "linear",
                     position: "right",
                     min: 1,
                     max: 4,
-                    title: { display: true, text: "Mood (1-4)" },
+                    title: { display: !isMobile.value, text: "Mood (1-4)" },
                     grid: { drawOnChartArea: false },
-                    ticks: { stepSize: 1 },
+                    ticks: isMobile.value ? { stepSize: 1, font: { size: 10 } } : { stepSize: 1 },
                 },
                 yBinary: {
                     type: "linear",
@@ -229,8 +237,15 @@ watch(
     { deep: true },
 );
 
+watch(isMobile, () => initializeChart());
+
 onMounted(() => {
     initializeChart();
+    window.addEventListener("resize", handleResize);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("resize", handleResize);
 });
 </script>
 
@@ -311,83 +326,85 @@ onMounted(() => {
                             Toggle Visibility
                         </h3>
 
-                        <label
-                            class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
-                        >
-                            <input
-                                type="checkbox"
-                                v-model="visibilitySettings.weight"
-                                class="checkbox checkbox-secondary rounded-lg"
-                            />
-                            <span class="text-sm font-medium text-base-content"
-                                >Weight</span
+                        <div class="grid grid-cols-2 gap-2 lg:grid-cols-1 lg:gap-0">
+                            <label
+                                class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
                             >
-                        </label>
+                                <input
+                                    type="checkbox"
+                                    v-model="visibilitySettings.weight"
+                                    class="checkbox checkbox-secondary rounded-lg"
+                                />
+                                <span class="text-sm font-medium text-base-content"
+                                    >Weight</span
+                                >
+                            </label>
 
-                        <label
-                            class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
-                        >
-                            <input
-                                type="checkbox"
-                                v-model="visibilitySettings.bodyFat"
-                                class="checkbox checkbox-secondary rounded-lg"
-                            />
-                            <span class="text-sm font-medium text-base-content"
-                                >Body Fat</span
+                            <label
+                                class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
                             >
-                        </label>
+                                <input
+                                    type="checkbox"
+                                    v-model="visibilitySettings.bodyFat"
+                                    class="checkbox checkbox-secondary rounded-lg"
+                                />
+                                <span class="text-sm font-medium text-base-content"
+                                    >Body Fat</span
+                                >
+                            </label>
 
-                        <label
-                            class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
-                        >
-                            <input
-                                type="checkbox"
-                                v-model="visibilitySettings.sleep"
-                                class="checkbox checkbox-info rounded-lg"
-                            />
-                            <span class="text-sm font-medium text-base-content"
-                                >Sleep Duration</span
+                            <label
+                                class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
                             >
-                        </label>
+                                <input
+                                    type="checkbox"
+                                    v-model="visibilitySettings.sleep"
+                                    class="checkbox checkbox-info rounded-lg"
+                                />
+                                <span class="text-sm font-medium text-base-content"
+                                    >Sleep Duration</span
+                                >
+                            </label>
 
-                        <label
-                            class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
-                        >
-                            <input
-                                type="checkbox"
-                                v-model="visibilitySettings.mood"
-                                class="checkbox checkbox-success rounded-lg"
-                            />
-                            <span class="text-sm font-medium text-base-content"
-                                >Mood Index</span
+                            <label
+                                class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
                             >
-                        </label>
+                                <input
+                                    type="checkbox"
+                                    v-model="visibilitySettings.mood"
+                                    class="checkbox checkbox-success rounded-lg"
+                                />
+                                <span class="text-sm font-medium text-base-content"
+                                    >Mood Index</span
+                                >
+                            </label>
 
-                        <label
-                            class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
-                        >
-                            <input
-                                type="checkbox"
-                                v-model="visibilitySettings.workout"
-                                class="checkbox checkbox-primary rounded-lg"
-                            />
-                            <span class="text-sm font-medium text-base-content"
-                                >Workout Logs</span
+                            <label
+                                class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
                             >
-                        </label>
+                                <input
+                                    type="checkbox"
+                                    v-model="visibilitySettings.workout"
+                                    class="checkbox checkbox-primary rounded-lg"
+                                />
+                                <span class="text-sm font-medium text-base-content"
+                                    >Workout Logs</span
+                                >
+                            </label>
 
-                        <label
-                            class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
-                        >
-                            <input
-                                type="checkbox"
-                                v-model="visibilitySettings.cardio"
-                                class="checkbox checkbox-accent rounded-lg"
-                            />
-                            <span class="text-sm font-medium text-base-content"
-                                >Cardio Logs</span
+                            <label
+                                class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-base-200 transition-colors"
                             >
-                        </label>
+                                <input
+                                    type="checkbox"
+                                    v-model="visibilitySettings.cardio"
+                                    class="checkbox checkbox-accent rounded-lg"
+                                />
+                                <span class="text-sm font-medium text-base-content"
+                                    >Cardio Logs</span
+                                >
+                            </label>
+                        </div>
                     </div>
 
                     <div
@@ -395,7 +412,7 @@ onMounted(() => {
                     >
                         <div
                             v-show="props.dailyStats.length > 0"
-                            class="relative w-full h-[450px]"
+                            class="relative w-full h-[300px] sm:h-[450px]"
                         >
                             <canvas ref="chartCanvasRef"></canvas>
                         </div>

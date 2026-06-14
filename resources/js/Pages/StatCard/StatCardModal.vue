@@ -129,12 +129,13 @@ function handleWeightInput(event: Event): void {
     <div
         v-if="isOpen"
         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity"
+        @click.self="emit('close')"
     >
         <div
             class="relative w-full max-w-lg overflow-hidden rounded-3xl bg-base-100 text-base-content shadow-2xl border border-base-300 animate-in fade-in zoom-in-95 duration-200"
         >
             <div
-                class="flex items-center justify-between border-b border-base-300 p-6"
+                class="flex items-center justify-between border-b border-base-300 p-4 sm:p-6"
             >
                 <h2 class="text-xl font-bold tracking-tight">
                     {{ stat ? "Edit Daily Log" : "Add Daily Log" }}
@@ -186,7 +187,7 @@ function handleWeightInput(event: Event): void {
             <form
                 id="daily-stat-form"
                 @submit.prevent="submitForm"
-                class="p-6 space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar bg-base-100"
+                class="p-4 sm:p-6 space-y-3 sm:space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar bg-base-100"
             >
                 <div>
                     <label
@@ -223,7 +224,7 @@ function handleWeightInput(event: Event): void {
                 </div>
 
                 <div
-                    class="grid grid-cols-2 gap-4 rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-secondary shadow-sm transition-colors duration-200"
+                    class="grid grid-cols-2 gap-4 rounded-2xl bg-base-200 p-3 sm:p-4 border border-base-300 border-l-4 border-l-secondary shadow-sm transition-colors duration-200"
                 >
                     <div>
                         <label
@@ -271,7 +272,7 @@ function handleWeightInput(event: Event): void {
                 </div>
 
                 <div
-                    class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-info shadow-sm transition-colors duration-200"
+                    class="rounded-2xl bg-base-200 p-3 sm:p-4 border border-base-300 border-l-4 border-l-info shadow-sm transition-colors duration-200"
                 >
                     <label
                         class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-info mb-3"
@@ -329,7 +330,7 @@ function handleWeightInput(event: Event): void {
                 </div>
 
                 <div
-                    class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-success shadow-sm transition-colors duration-200"
+                    class="rounded-2xl bg-base-200 p-3 sm:p-4 border border-base-300 border-l-4 border-l-success shadow-sm transition-colors duration-200"
                 >
                     <label
                         class="text-xs font-bold uppercase tracking-wider text-success block mb-3"
@@ -353,7 +354,7 @@ function handleWeightInput(event: Event): void {
                                 viewBox="0 0 24 24"
                                 stroke-width="2"
                                 stroke="currentColor"
-                                class="h-8 w-8"
+                                class="h-6 w-6 sm:h-8 sm:w-8"
                             >
                                 <circle cx="12" cy="12" r="9" />
                                 <path
@@ -380,7 +381,7 @@ function handleWeightInput(event: Event): void {
                                 viewBox="0 0 24 24"
                                 stroke-width="2"
                                 stroke="currentColor"
-                                class="h-8 w-8"
+                                class="h-6 w-6 sm:h-8 sm:w-8"
                             >
                                 <circle cx="12" cy="12" r="9" />
                                 <path
@@ -407,7 +408,7 @@ function handleWeightInput(event: Event): void {
                                 viewBox="0 0 24 24"
                                 stroke-width="2"
                                 stroke="currentColor"
-                                class="h-8 w-8"
+                                class="h-6 w-6 sm:h-8 sm:w-8"
                             >
                                 <circle cx="12" cy="12" r="9" />
                                 <path
@@ -434,7 +435,7 @@ function handleWeightInput(event: Event): void {
                                 viewBox="0 0 24 24"
                                 stroke-width="2"
                                 stroke="currentColor"
-                                class="h-8 w-8"
+                                class="h-6 w-6 sm:h-8 sm:w-8"
                             >
                                 <circle cx="12" cy="12" r="9" />
                                 <path
@@ -449,7 +450,7 @@ function handleWeightInput(event: Event): void {
 
                 <div class="flex items-center justify-between gap-6 px-1">
                     <div
-                        class="flex items-center justify-between flex-1 bg-base-200 border border-base-300 rounded-2xl p-4 transition-colors duration-200"
+                        class="flex items-center justify-between flex-1 bg-base-200 border border-base-300 rounded-2xl p-3 sm:p-4 transition-colors duration-200"
                     >
                         <span class="text-sm font-medium text-base-content/80"
                             >Workout</span
@@ -474,7 +475,7 @@ function handleWeightInput(event: Event): void {
                     </div>
 
                     <div
-                        class="flex items-center justify-between flex-1 bg-base-200 border border-base-300 rounded-2xl p-4 transition-colors duration-200"
+                        class="flex items-center justify-between flex-1 bg-base-200 border border-base-300 rounded-2xl p-3 sm:p-4 transition-colors duration-200"
                     >
                         <span class="text-sm font-medium text-base-content/80"
                             >Cardio</span

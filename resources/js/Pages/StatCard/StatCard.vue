@@ -43,7 +43,7 @@ const avatarInitial = computed((): string => {
 
 <template>
     <div
-        class="flex flex-col gap-4 rounded-3xl bg-base-100 p-5 text-base-content shadow-md border border-base-300 w-full max-w-sm mx-auto transition-all duration-200"
+        class="flex flex-col gap-4 rounded-3xl bg-base-100 p-4 sm:p-5 text-base-content shadow-md border border-base-300 w-full max-w-sm mx-auto transition-all duration-200"
     >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -92,7 +92,7 @@ const avatarInitial = computed((): string => {
         </div>
 
         <div
-            class="relative overflow-hidden rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-secondary transition-colors duration-200"
+            class="relative overflow-hidden rounded-2xl bg-base-200 p-3 sm:p-4 border border-base-300 border-l-4 border-l-secondary transition-colors duration-200"
         >
             <span
                 class="text-xs font-bold uppercase tracking-wider text-secondary"
@@ -101,7 +101,7 @@ const avatarInitial = computed((): string => {
             <div class="mt-2 flex items-baseline justify-between">
                 <div>
                     <span
-                        class="text-3xl font-extrabold tracking-tight text-base-content"
+                        class="text-xl sm:text-3xl font-extrabold tracking-tight text-base-content"
                         >{{ stat.body_weight }}</span
                     >
                     <span class="ml-1 text-sm font-semibold text-secondary"
@@ -110,7 +110,7 @@ const avatarInitial = computed((): string => {
                 </div>
                 <div>
                     <span
-                        class="text-2xl font-bold tracking-tight text-base-content"
+                        class="text-lg sm:text-2xl font-bold tracking-tight text-base-content"
                         >{{ stat.body_fat }}</span
                     >
                     <span class="ml-0.5 text-sm font-semibold text-secondary"
@@ -121,21 +121,21 @@ const avatarInitial = computed((): string => {
         </div>
 
         <div
-            class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-info transition-colors duration-200"
+            class="rounded-2xl bg-base-200 p-3 sm:p-4 border border-base-300 border-l-4 border-l-info transition-colors duration-200"
         >
             <span class="text-xs font-bold uppercase tracking-wider text-info"
                 >Sleep Duration</span
             >
             <div class="mt-1">
                 <span
-                    class="text-3xl font-extrabold tracking-tight text-info"
+                    class="text-xl sm:text-3xl font-extrabold tracking-tight text-info"
                     >{{ formattedSleep }}</span
                 >
             </div>
         </div>
 
         <div
-            class="rounded-2xl bg-base-200 p-4 border border-base-300 border-l-4 border-l-success transition-colors duration-200"
+            class="rounded-2xl bg-base-200 p-3 sm:p-4 border border-base-300 border-l-4 border-l-success transition-colors duration-200"
         >
             <span
                 class="text-xs font-bold uppercase tracking-wider text-success"
@@ -156,7 +156,7 @@ const avatarInitial = computed((): string => {
                         viewBox="0 0 24 24"
                         stroke-width="2"
                         stroke="currentColor"
-                        class="h-7 w-7"
+                        class="h-5 w-5 sm:h-7 sm:w-7"
                     >
                         <circle cx="12" cy="12" r="9" />
                         <path
@@ -180,7 +180,7 @@ const avatarInitial = computed((): string => {
                         viewBox="0 0 24 24"
                         stroke-width="2"
                         stroke="currentColor"
-                        class="h-7 w-7"
+                        class="h-5 w-5 sm:h-7 sm:w-7"
                     >
                         <circle cx="12" cy="12" r="9" />
                         <path
@@ -204,7 +204,7 @@ const avatarInitial = computed((): string => {
                         viewBox="0 0 24 24"
                         stroke-width="2"
                         stroke="currentColor"
-                        class="h-7 w-7"
+                        class="h-5 w-5 sm:h-7 sm:w-7"
                     >
                         <circle cx="12" cy="12" r="9" />
                         <path
@@ -228,7 +228,7 @@ const avatarInitial = computed((): string => {
                         viewBox="0 0 24 24"
                         stroke-width="2"
                         stroke="currentColor"
-                        class="h-7 w-7"
+                        class="h-5 w-5 sm:h-7 sm:w-7"
                     >
                         <circle cx="12" cy="12" r="9" />
                         <path
