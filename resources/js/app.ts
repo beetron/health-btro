@@ -7,7 +7,17 @@ import { createApp, h } from "vue";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/src/js";
 import type { DefineComponent } from "vue";
 
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+// Extend the global window interface to allow runtime application naming parameters from Blade templates
+declare global {
+    interface Window {
+        Laravel?: {
+            appName: string;
+        };
+    }
+}
+
+// Fall back to the globally declared runtime variable injected by the Blade layout to support dynamic names in immutable environments
+const appName = window.Laravel?.appName || "Laravel";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

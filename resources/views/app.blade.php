@@ -24,6 +24,11 @@
                 document.documentElement.classList.remove('dark');
             }
         } catch (e) {}
+
+        // Pass runtime environment configurations safely to the frontend application context
+        window.Laravel = {
+            appName: "{{ config('app.name', 'Laravel') }}"
+        };
         </script>
         @vite(['resources/css/app.css','resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
