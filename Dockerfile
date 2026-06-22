@@ -101,8 +101,10 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framewor
 
 # Compile production caches during build phase using a dummy key placeholder
 # This allows building immutable cache files into the read-only layer without a runtime .env file
-RUN APP_KEY=base64:dummypasstextforbuildstepscompileonly123= APP_ENV=production php artisan route:cache \
-    && APP_KEY=base64:dummypasstextforbuildstepscompileonly123= APP_ENV=production php artisan view:cache
+#RUN APP_KEY=base64:dummypasstextforbuildstepscompileonly123= APP_ENV=production php artisan route:cache \
+#    && APP_KEY=base64:dummypasstextforbuildstepscompileonly123= APP_ENV=production php artisan view:cache
+# Remove view:cache from build, only keep route:cache
+RUN APP_KEY=base64:dummypasstextforbuildstepscompileonly123= APP_ENV=production php artisan route:cache
 
 # Reconfigure Nginx workspace directories to allow read/write execution permissions for non-root users
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
